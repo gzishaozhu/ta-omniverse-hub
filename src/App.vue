@@ -1,0 +1,45 @@
+﻿<script setup lang="ts">
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const navItems = [
+  { path: '/', label: 'Home', icon: '◆' },
+  { path: '/gallery', label: '3D Gallery', icon: '◈' },
+  { path: '/shader-studio', label: 'Shader Studio', icon: '◉' },
+]
+</script>
+
+<template>
+  <nav class="top-nav">
+    <div class="nav-brand" @click="router.push('/')">TA Omniverse Hub</div>
+    <div class="nav-links">
+      <button v-for="item in navItems" :key="item.path"
+        :class="['nav-btn', { active: $route.path === item.path }]"
+        @click="router.push(item.path)">
+        <span class="nav-icon">{{ item.icon }}</span>
+        {{ item.label }}
+      </button>
+    </div>
+  </nav>
+  <main class="main-content">
+    <RouterView />
+  </main>
+</template>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #app { width: 100%; height: 100%; overflow: hidden; background: #0a0a0f; font-family: "Inter",-apple-system,BlinkMacSystemFont,sans-serif; color: #e0e0e8; }
+.top-nav {
+  height: 48px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; background: #12121f; border-bottom: 1px solid #2a2a40; z-index: 100; position: relative;
+}
+.nav-brand { font-size: 15px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg,#6c5ce7,#00cec9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 4px; }
+.nav-btn {
+  display: flex; align-items: center; gap: 5px; padding: 6px 12px; border: 1px solid transparent; border-radius: 6px;
+  background: transparent; color: #8888aa; font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: inherit;
+}
+.nav-btn:hover { border-color: #2a2a40; background: #1a1a2e; color: #e0e0e8; }
+.nav-btn.active { border-color: #6c5ce7; background: rgba(108,92,231,0.15); color: #6c5ce7; }
+.nav-icon { font-size: 10px; }
+.main-content { height: calc(100vh - 48px); position: relative; }
+</style>
