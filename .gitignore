@@ -1,0 +1,10 @@
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.vite/
+docx_temp/
+docx_temp.zip
+*.log
+.DS_Store
+Thumbs.db
